@@ -17,7 +17,32 @@ class NewGame extends Component {
     snakes: [
       {
         name: "snake 1",
-        url: "https://snake1.herokuapp.com",
+        url: "http://localhost:5000",
+        id: ""
+      },
+      {
+        name: "snake 2",
+        url: "http://localhost:5000",
+        id: ""
+      },
+      {
+        name: "snake 3",
+        url: "http://localhost:5000",
+        id: ""
+      },
+      {
+        name: "snake 4",
+        url: "http://localhost:5000",
+        id: ""
+      },
+      {
+        name: "snake 5",
+        url: "http://localhost:5000",
+        id: ""
+      },
+      {
+        name: "snake 6",
+        url: "http://localhost:5000",
         id: ""
       }
     ],
