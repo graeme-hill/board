@@ -1,6 +1,6 @@
-const SNAKE_MIN_DELAY_MILLIS = 50;
+import streamAll from "./websocket";
 
-export let streamAll = websocketStreamAll;
+const SNAKE_MIN_DELAY_MILLIS = 50;
 
 function join(a, b) {
   return a.replace(/\/+$/, "") + "/" + b.replace(/^\/+/, "");
@@ -73,33 +73,6 @@ function httpToWsProtocol(url) {
 
   console.error("Invalid URL: " + url);
   return url;
-}
-
-function websocketStreamAll(url, receive) {
-  let done = false;
-
-  return new Promise((resolve, reject) => {
-    const ws = new WebSocket(url);
-    ws.addEventListener("message", e => {
-      const obj = JSON.parse(e.data);
-      done = receive(obj);
-      if (done) {
-        ws.close();
-        resolve();
-      }
-    });
-
-    ws.addEventListener("onerror", e => {
-      reject(e);
-    });
-
-    ws.addEventListener("onclose", e => {
-      if (!done) {
-        done = true;
-        resolve();
-      }
-    });
-  });
 }
 
 export function getGameInfo(baseUrl, gameId) {
