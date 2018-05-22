@@ -65,16 +65,20 @@ class Screenshot extends React.Component {
       },
       function(obj) {
         console.log("DONE");
-        debugger;
-        if (!obj.error) {
-          var image = obj.image,
-            animatedImage = document.createElement("img");
-          animatedImage.src = image;
-          document.body.appendChild(animatedImage);
-        }
+        download("battlesnake.gif", obj.image);
       }
     );
   }
+}
+
+function download(filename, url) {
+  const octetUrl = url.replace("image/gif", "image/octet-stream");
+  window.location.href = octetUrl;
+  // debugger;
+  // const templink = document.createElement("a");
+  // templink.download=filename;
+  // templink.href= url;
+  // templink.click();
 }
 
 export default Screenshot;
