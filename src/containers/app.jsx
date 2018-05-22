@@ -8,9 +8,7 @@ const options = parseQueryString(window.location.search);
 const mapStateToProps = state => {
   return {
     options: options,
-    grid: state.grid,
-    snakes: state.snakes,
-    food: state.food
+    frame: state.frame
   };
 };
 

@@ -1,6 +1,11 @@
 import { formatFrame } from "./game-state";
 
 it("should place snakes on valid board", () => {
+  const game = {
+    Width: 15,
+    Height: 20
+  };
+
   const apiFrame = {
     Turn: 1,
     Food: [{ X: 5, Y: 2 }, { X: 1, Y: 8 }],
@@ -24,8 +29,9 @@ it("should place snakes on valid board", () => {
     ]
   };
 
-  const frame = formatFrame(apiFrame);
+  const frame = formatFrame(game, apiFrame);
 
+  expect(frame.game).toEqual({ width: 15, height: 20 });
   expect(frame.turn).toBe(1);
   expect(frame.snakes).toHaveLength(2);
   expect(frame.food).toHaveLength(2);
@@ -60,6 +66,11 @@ it("should place snakes on valid board", () => {
 });
 
 it("should recognize dead snakes", () => {
+  const game = {
+    Width: 15,
+    Height: 20
+  };
+
   const apiFrame = {
     Turn: 1,
     Food: [{ X: 5, Y: 2 }, { X: 1, Y: 8 }],
@@ -76,8 +87,9 @@ it("should recognize dead snakes", () => {
     ]
   };
 
-  const frame = formatFrame(apiFrame);
+  const frame = formatFrame(game, apiFrame);
 
+  expect(frame.game).toEqual({ width: 15, height: 20 });
   expect(frame.turn).toBe(1);
   expect(frame.snakes).toHaveLength(1);
   expect(frame.food).toHaveLength(2);
@@ -100,6 +112,11 @@ it("should recognize dead snakes", () => {
 });
 
 it("should set undefined numbers to zero", () => {
+  const game = {
+    Width: 15,
+    Height: 20
+  };
+
   const apiFrame = {
     Food: [{}],
     Snakes: [
@@ -115,8 +132,9 @@ it("should set undefined numbers to zero", () => {
     ]
   };
 
-  const frame = formatFrame(apiFrame);
+  const frame = formatFrame(game, apiFrame);
 
+  expect(frame.game).toEqual({ width: 15, height: 20 });
   expect(frame.turn).toBe(0);
   expect(frame.snakes).toHaveLength(1);
   expect(frame.food).toHaveLength(1);

@@ -3,15 +3,9 @@ import { formatFrame } from "../utils/game-state";
 const frames = (state = {}, action) => {
   switch (action.type) {
     case "RECEIVE_FRAME":
-      const frame = formatFrame(action.frame);
       return {
         ...state,
-        grid: {
-          height: action.game.Game.Height,
-          width: action.game.Game.Width
-        },
-        snakes: frame.snakes,
-        food: frame.food
+        frame: formatFrame(action.game.Game, action.frame)
       };
     case "REQUEST_FRAMES":
       return { ...state };

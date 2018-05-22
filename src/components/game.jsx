@@ -1,7 +1,7 @@
 import React from "react";
-import Avatar from "./avatar";
-import Board from "./board";
 import BlankState from "./blank-state";
+import GameFrame from "./game-frame";
+import Screenshot from "./screenshot";
 
 class Game extends React.Component {
   componentWillMount() {
@@ -18,30 +18,16 @@ class Game extends React.Component {
   render() {
     if (this.invalidArgs) {
       return <BlankState />;
-    } else {
-      return this.renderGame();
-    }
-  }
-
-  renderGame() {
-    return (
-      <div>
+    } else if (this.props.frame) {
+      return (
         <div>
-          {this.props.snakes
-            ? this.props.snakes.map((snake, i) => (
-                <Avatar snake={snake} key={"avatar" + i} />
-              ))
-            : undefined}
+          <GameFrame frame={this.props.frame} />
+          <Screenshot frame={this.props.frame} />
         </div>
-
-        <Board
-          snakes={this.props.snakes}
-          food={this.props.food}
-          width={this.props.grid.width}
-          height={this.props.grid.height}
-        />
-      </div>
-    );
+      );
+    } else {
+      return <div>loading...</div>;
+    }
   }
 }
 

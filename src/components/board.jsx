@@ -47,9 +47,10 @@ class Board extends React.Component {
     return <p>loading</p>;
   }
 
-  renderBoard() {
-    const snakes = this.props.snakes || [];
-    const food = this.props.food || [];
+  render() {
+    const snakes = this.props.frame.snakes || [];
+    const food = this.props.frame.food || [];
+    const game = this.props.frame.game;
 
     // Make alive snakes render on top of dead snakes by sorting alive first
     snakes.sort((a, b) => {
@@ -58,15 +59,15 @@ class Board extends React.Component {
       return aOrder - bOrder;
     });
 
-    const width = toGridSpace(this.props.width);
-    const height = toGridSpace(this.props.height);
+    const width = toGridSpace(game.width);
+    const height = toGridSpace(game.height);
 
     return (
-      <svg width={width} height={height}>
+      <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
         <rect width={width} height={height} fill="#ddd" />
 
-        {range(this.props.height).map((_, row) =>
-          range(this.props.width).map((_, col) => (
+        {range(game.height).map((_, row) =>
+          range(game.width).map((_, col) => (
             <rect
               x={toGridSpace(col)}
               y={toGridSpace(row)}
@@ -103,14 +104,6 @@ class Board extends React.Component {
         ))}
       </svg>
     );
-  }
-
-  render() {
-    if (this.props.snakes) {
-      return this.renderBoard();
-    } else {
-      return this.renderLoading();
-    }
   }
 }
 

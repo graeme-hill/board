@@ -1,9 +1,17 @@
-export function formatFrame(frame) {
+export function formatFrame(game, frame) {
   cleanFrame(frame);
   return {
     turn: frame.Turn,
     snakes: formatSnakes(frame.Snakes),
-    food: formatPositions(frame.Food)
+    food: formatPositions(frame.Food),
+    game: formatGame(game)
+  };
+}
+
+function formatGame(game) {
+  return {
+    width: game.Width,
+    height: game.Height
   };
 }
 
